@@ -84,3 +84,6 @@ The Netcat listener on the penetration tester's machine receives the incoming co
 ## Conclusion and Ethical Considerations
 
 This case study demonstrates a common attack vector and highlights the importance of user awareness, robust endpoint protection, and network monitoring. It is crucial to remember that the techniques described herein should only be used in authorized and ethical penetration testing engagements. The unauthorized access of computer systems is illegal and unethical. The goal of ethical hacking is to identify and remediate security vulnerabilities, not to cause harm.
+
+# AUTHOR:
+## SULEIMAN ZAINAB
